@@ -1,7 +1,7 @@
-<script lang="ts">
+<script setup lang="ts">
 </script>
 
 <template>
-  <div>"Hello world."</div>
+  <div>vue Hello world.</div>
 </template>
 

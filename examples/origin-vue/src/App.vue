@@ -13,6 +13,7 @@ import PlayVue from "./components/PlayVue.vue";
     <div class="h-[400px] w-full">
       <AffVue />
     </div>
+    <hr>
     <div class="h-[400px] w-full">
       <PlayVue />
     </div>

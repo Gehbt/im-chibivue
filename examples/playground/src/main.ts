@@ -1,10 +1,11 @@
+import "./style.css"
 import { createApp } from "chibivue";
 import { bootstrapWujie } from "../wujie-utils/bootstrap";
 
 const app = () =>
   createApp({
     render() {
-      return "Hello world.";
+      return "<div>chibi hello world</div>";
     },
   });
 
