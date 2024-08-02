@@ -1,0 +1,4 @@
+{
+  "root": "origin-vue",
+  "members":["playground","aff-vue"]
+}
