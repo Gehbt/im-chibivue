@@ -8,8 +8,8 @@ declare module "wujie-vue3" {
     loading?: HTMLElement;
     url?: string;
     sync?: boolean;
-    prefix: object;
-    alive?: bool;
+    prefix?: object;
+    alive?: boolean;
     // fetch?: function;
     // fiber: function;
     // replace?: func;

@@ -9,7 +9,8 @@
     },
     "moduleResolution": "node",
     "allowJs": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "verbatimModuleSyntax": true
   },
   "include": ["packages/**/*.ts", "examples/**/**.ts"],
   "exclude": ["node_modules", "dist"]
