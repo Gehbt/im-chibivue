@@ -7,6 +7,7 @@
     "lifecycles",
     "rolldown",
     "unocss",
+    "vnode",
     "WUJIE"
   ],
   "editor.codeActionsOnSave": {
@@ -15,5 +16,78 @@
   "editor.formatOnSave": true,
   "[typescript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
-  }
+  },
+  "vscode-highlight-text.rules": {
+    "vue": {
+      "light": {
+        "purple": {
+          "match": [
+            "v-if",
+            "v-else-if",
+            "v-else"
+          ],
+          "before": {
+            "contentText": "✨"
+          }
+        },
+        "#B392F0": [
+          "v-for"
+        ],
+        "#FFC83D": [
+          "<template\\s+(\\#[^\\s\\/>=]+)",
+          "v-bind",
+          "v-once",
+          "v-on",
+          "(v-slot:[^>\\s\\/>]+)",
+          "v-html",
+          "v-text"
+        ],
+        "rgb(99, 102, 241)": [
+          ":is"
+        ],
+        "rgb(14, 165, 233)": [
+          "(defineProps)[<\\(]",
+          "defineOptions",
+          "defineEmits",
+          "defineExpose"
+        ]
+      },
+      "dark": {
+        "purple": {
+          "match": [
+            "v-if",
+            "v-else-if",
+            "v-else"
+          ],
+          "before": {
+            "contentText": ""
+          }
+        },
+        "#B392F0": [
+          "v-for"
+        ],
+        "#FFC83D": [
+          "<template\\s+(\\#[^\\s\\/>=]+)",
+          "v-bind",
+          "v-once",
+          "v-on",
+          "(v-slot:[^>\\s\\/>]+)",
+          "v-html",
+          "v-text"
+        ],
+        "rgb(99, 102, 241)": {
+          "match": [
+            ":is"
+          ]
+        },
+        "rgb(14, 165, 233)": [
+          "(defineProps)[<\\(]",
+          "defineOptions",
+          "defineEmits",
+          "defineExpose"
+        ]
+      }
+    },
+  },
+  "typescript.tsdk": "node_modules\\typescript\\lib",
 }

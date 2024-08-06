@@ -17,10 +17,11 @@ export function createAppAPI<HostElement>(
   render: RootRenderFunction<HostElement>,
 ): CreateAppFunction<HostElement> {
   return function createApp(rootComponent) {
-    const app: App = {
+    const app: App<HostElement> = {
       mount(rootContainer: HostElement) {
-        const message = rootComponent.render!();
-        render(message, rootContainer);
+        const vnode = rootComponent.render!();
+        console.log("vnode", vnode); // Check the log
+        render(vnode, rootContainer);
       },
       unmount() {
         // TODO: unmount
