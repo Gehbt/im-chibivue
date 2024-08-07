@@ -10,7 +10,7 @@ interface Invoker extends EventListener {
 }
 interface VueSignElement extends Element {
   /**
-   * @desc vei = vue event invokers -- 其实是个 map
+   * @desc vei = vue event invokers -- 其实是个 map, 用来
    * */
   _vei?: Record<string, Invoker | undefined>;
 }
@@ -43,19 +43,19 @@ export function patchEvent(
   const existingInvoker = invokers[rawName];
 
   if (value && existingInvoker) {
-    // patch 更新
+    // patch 更新为新的值
     existingInvoker.value = value;
   } else {
     const eventName = parseName(rawName);
     if (value) {
       // add
       invokers[rawName] = createInvoker(value);
-      const invoker = invokers[rawName];
-      addEventListener(el, eventName, invoker);
+      const newInvoker = invokers[rawName];
+      addEventListener(el, eventName, newInvoker);
     } else if (existingInvoker) {
       // remove
       removeEventListener(el, eventName, existingInvoker);
-      invokers[rawName] = undefined;
+      delete invokers[rawName];
     }
   }
 }
@@ -66,7 +66,8 @@ function parseName(rawName: string): string {
   return rawName.slice(2).toLocaleLowerCase();
 }
 
-function createInvoker(initialValue: EventFunction) {
+function createInvoker(initialValue: EventFunction): Invoker {
+  // 这里其实类似与委托, 把原生的 event 转发
   const invoker: Invoker = (e: Event) => {
     invoker.value(e);
   };

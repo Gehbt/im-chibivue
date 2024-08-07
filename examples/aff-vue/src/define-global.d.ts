@@ -7,7 +7,7 @@ declare global {
     // 子应用 unmount 函数
     __WUJIE_UNMOUNT: () => void;
     // 子应用无界实例
-    __WUJIE: { mount: () => void,id: number };
+    __WUJIE: { mount: () => void; id: number };
   }
 }
 export {};
