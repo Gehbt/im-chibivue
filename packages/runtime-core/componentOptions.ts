@@ -1,3 +1,4 @@
 export type ComponentOptions = {
-  render?: () => any;
+  render?: (...args: any[]) => any;
+  setup?: () => (...args: any[]) => any;
 };

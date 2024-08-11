@@ -40,6 +40,8 @@ export function createRenderer(options: RendererOptions) {
     insert: hostInsert,
   } = options;
   const render: RootRenderFunction = (vnode, container) => {
+    // remove old elements
+    while (container.firstChild) container.removeChild(container.firstChild); // Add code to remove all elements
     const el = renderVNode(vnode);
     hostInsert(el, container);
   };
