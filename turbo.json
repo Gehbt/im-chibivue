@@ -5,6 +5,15 @@
       "cache": false,
       "persistent": true,
       "interactive": true
+    },
+    "type-check": {
+      "cache": true
+    },
+    "build": {
+      "cache": true,
+      "dependsOn": [
+        "^build"
+      ]
     }
   }
 }

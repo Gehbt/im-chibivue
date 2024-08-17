@@ -23,5 +23,5 @@
     "noUnusedParameters": false,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue","./wujie-utils"]
+  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue", "./wujie-utils"]
 }

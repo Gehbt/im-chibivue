@@ -4,20 +4,19 @@ import { type Dep, createDep } from "./dep";
 type KeyToDepMap = Map<any, Dep>;
 const targetMap = new WeakMap<any, KeyToDepMap>();
 
-// # Module Level
-export let activeEffect: ReactiveEffect | undefined;
-
+// # Module Level Namespace
+export namespace Effect {
+  export let activeEffect: ReactiveEffect | undefined;
+}
+// MARK: export
 export class ReactiveEffect<T = any> {
-  constructor(fn: () => T) {
-    this.fn = fn;
-  }
-  fn: () => T;
+  constructor(public fn: () => T) {}
 
   run() {
-    let parent: ReactiveEffect | undefined = activeEffect;
-    activeEffect = this;
+    let parent: ReactiveEffect | undefined = Effect.activeEffect;
+    Effect.activeEffect = this;
     const res = this.fn();
-    activeEffect = parent;
+    Effect.activeEffect = parent;
     return res;
   }
   get [Symbol.toStringTag]() {
@@ -37,22 +36,21 @@ export function track(target: object, key: PropertyKey) {
     depsMap.set(key, dep);
   }
 
-  if (activeEffect) {
-    dep.add(activeEffect);
+  if (Effect.activeEffect) {
+    dep.add(Effect.activeEffect);
   }
 }
 
-/* @__NO_SIDE_EFFECTS__ */
+/* #__NO_SIDE_EFFECTS__ */
 export function trigger(target: object, key?: PropertyKey) {
   const depsMap = targetMap.get(target);
   if (!depsMap) return;
 
   const dep = depsMap.get(key);
+  if (!dep) return;
 
-  if (dep) {
-    const effects = [...dep];
-    for (const effect of effects) {
-      effect.run();
-    }
+  const effects = [...dep];
+  for (const effect of effects) {
+    effect.run();
   }
 }

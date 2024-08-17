@@ -1,5 +1,8 @@
 <script setup lang="ts">
 import WujieVue from "wujie-vue3";
+defineOptions({
+  inheritAttrs: true
+})
 </script>
 
 <template>

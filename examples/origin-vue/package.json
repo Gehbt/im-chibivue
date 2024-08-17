@@ -11,20 +11,20 @@
     "type-check": "vue-tsc --build --force"
   },
   "dependencies": {
-    "vue": "^3.4.35",
+    "vue": "^3.4.38",
     "wujie": "^1.0.22",
     "wujie-vue3": "^1.0.22"
   },
   "devDependencies": {
     "@tsconfig/node20": "^20.1.4",
-    "@types/node": "^20.14.13",
+    "@types/node": "^20.15.0",
     "@vitejs/plugin-vue": "^5.1.2",
-    "@vitejs/plugin-vue-jsx": "^4.0.0",
+    "@vitejs/plugin-vue-jsx": "^4.0.1",
     "@vue/tsconfig": "^0.5.1",
     "npm-run-all2": "^6.2.2",
     "typescript": "catalog:",
     "vite": "catalog:",
-    "vite-plugin-vue-devtools": "^7.3.7",
+    "vite-plugin-vue-devtools": "^7.3.8",
     "vue-tsc": "^2.0.29"
   }
 }

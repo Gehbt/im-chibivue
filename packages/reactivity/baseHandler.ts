@@ -6,7 +6,7 @@ export const mutableHandlersMaker: <T extends object>(
   reactive: ProxyFunction<T>,
 ) => ProxyHandler<T> = (reactive) => ({
   get(target: object, key, receiver: object) {
-    // Object.prototype.toString.call(Prox) === "Reactive"
+    // Object.prototype.toString.call(Proxy_Obj) === "Reactive"
     if (key === Symbol.toStringTag) return "Reactive";
     // #region  doTrack
     (() => {

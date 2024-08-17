@@ -1,5 +1,6 @@
 import "./assets/main.css";
 import "virtual:uno.css";
+import "virtual:unocss-devtools";
 import { createApp } from "vue";
 import App from "./App.vue";
 import WujieVue from "wujie-vue3";

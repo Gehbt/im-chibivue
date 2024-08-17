@@ -1,20 +1,21 @@
 {
   "name": "aff-vue",
-  "private": true,
   "version": "0.0.0",
+  "private": true,
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc -b && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "type-check": "vue-tsc -b --force"
   },
   "dependencies": {
-    "vue": "^3.4.35"
+    "vue": "^3.4.38"
   },
   "devDependencies": {
+    "@vitejs/plugin-vue": "^5.1.2",
     "typescript": "catalog:",
     "vite": "catalog:",
-    "@vitejs/plugin-vue": "^5.1.2",
     "vue-tsc": "^2.0.29"
   }
 }

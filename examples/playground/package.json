@@ -6,7 +6,10 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "build-debug": "vite build --debug",
+    "type-check": "tsc --noEmit",
+    "type-check-debug": "tsc --noEmit --debug --showConfig"
   },
   "devDependencies": {
     "typescript": "catalog:",

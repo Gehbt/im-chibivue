@@ -16,5 +16,8 @@
     "noUnusedParameters": false,
     "noFallthroughCasesInSwitch": true
   },
-  "types": ["node"]
+  "types": ["node"],
+  "vueCompilerOptions": {
+    "strictTemplates": true
+  }
 }
