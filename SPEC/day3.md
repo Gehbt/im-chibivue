@@ -3,13 +3,19 @@
 ```mermaid
   flowchart LR
     reactiveProxy["Proxy"]
-    reactive --> reactiveProxy
-    reactiveProxy --get--> track
-    reactiveProxy --set--> trigger
-    track --register effect--> targetMap
-    trigger --get effect--> targetMap
+    targetWeakMap["targetMap"]
 
-    Dep --> targetMap
-    ReactiveEffect --> Dep
-    fn --> ReactiveEffect
+    subgraph reactive.ts
+      reactive --> reactiveProxy
+      reactiveProxy --get--> track
+      reactiveProxy --set--> trigger
+      track --"register effect"--> targetWeakMap
+      trigger --"get effect"--> targetWeakMap
+    end
+
+    subgraph ReactiveEffectClass
+      Dep --> targetWeakMap
+      ReactiveEffect --> Dep
+      fn --> ReactiveEffect
+    end
 ```

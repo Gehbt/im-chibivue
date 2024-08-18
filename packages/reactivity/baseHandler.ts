@@ -5,10 +5,11 @@ type ProxyFunction<T extends object> = (target: T) => T;
 export const mutableHandlersMaker: <T extends object>(
   reactive: ProxyFunction<T>,
 ) => ProxyHandler<T> = (reactive) => ({
-  get(target: object, key, receiver: object) {
+  get(target: object, key, receiver: object): any {
     // Object.prototype.toString.call(Proxy_Obj) === "Reactive"
     if (key === Symbol.toStringTag) return "Reactive";
     // #region  doTrack
+    // 在 get 前, 跟踪 effect
     (() => {
       track(target, key);
     })();
@@ -22,10 +23,11 @@ export const mutableHandlersMaker: <T extends object>(
     }
   },
 
-  set(target: object, key, value: unknown, receiver: object) {
+  set(target: object, key, value: unknown, receiver: object): boolean {
     let oldValue = target[key as keyof typeof target];
     Reflect.set(target, key, value, receiver);
     // #region doTrigger
+    // 在 set 后, 触发 effect
     (() => {
       if (hasChanged(value, oldValue)) {
         trigger(target, key);

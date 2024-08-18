@@ -2,6 +2,9 @@ import { type Dep, createDep } from "./dep";
 
 // target -> key -> dep
 type KeyToDepMap = Map<any, Dep>;
+/**
+ * @desc key 为源对象, value 为每次更新的依赖的缓存
+ */
 const targetMap = new WeakMap<any, KeyToDepMap>();
 
 // # Module Level Namespace
@@ -10,13 +13,17 @@ export namespace Effect {
 }
 // MARK: export
 export class ReactiveEffect<T = any> {
-  constructor(public fn: () => T) {}
-
+  constructor(
+    // 这里的注册的fn 为在更新ReactiveEffect时触发
+    public fn: () => T,
+  ) {}
+  // 触发 fn运行
   run() {
-    let parent: ReactiveEffect | undefined = Effect.activeEffect;
+    // 在执行 fn 之前保存 (模块的)activeEffect，并在执行完后恢复它。
+    let saveAffect: ReactiveEffect | undefined = Effect.activeEffect;
     Effect.activeEffect = this;
     const res = this.fn();
-    Effect.activeEffect = parent;
+    Effect.activeEffect = saveAffect;
     return res;
   }
   get [Symbol.toStringTag]() {
@@ -24,17 +31,23 @@ export class ReactiveEffect<T = any> {
   }
 }
 
-export function track(target: object, key: PropertyKey) {
+// 跟踪: 注入 dep
+export function track(target: object, key: PropertyKey): void {
   let depsMap = targetMap.get(target);
+  let dep: Dep | undefined;
+
   if (!depsMap) {
     targetMap.set(target, (depsMap = new Map()));
+  } else {
+    // 查询, 可能没有
+    dep = depsMap.get(key);
   }
 
-  let dep = depsMap.get(key);
   if (!dep) {
     dep = createDep();
-    depsMap.set(key, dep);
   }
+
+  depsMap.set(key, dep);
 
   if (Effect.activeEffect) {
     dep.add(Effect.activeEffect);
@@ -42,7 +55,8 @@ export function track(target: object, key: PropertyKey) {
 }
 
 /* #__NO_SIDE_EFFECTS__ */
-export function trigger(target: object, key?: PropertyKey) {
+// 触发: 查询dep 并触发
+export function trigger(target: object, key?: PropertyKey): void {
   const depsMap = targetMap.get(target);
   if (!depsMap) return;
 

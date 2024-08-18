@@ -26,14 +26,13 @@ export function createAppAPI<HostElement>(
 
         const updateComponent = () => {
           // 先渲染 根节点
-          const vnode = componentRender();
-          render(vnode, rootContainer);
+          const root_vnode = componentRender();
+          render(root_vnode, rootContainer);
         };
 
-        // From here
+        // MARK: effect
         const effect = new ReactiveEffect(updateComponent);
         effect.run();
-        // To here
       },
       unmount() {
         // TODO: unmount
