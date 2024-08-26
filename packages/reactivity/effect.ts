@@ -3,7 +3,7 @@ import { type Dep, createDep } from "./dep";
 // target -> key -> dep
 type KeyToDepMap = Map<any, Dep>;
 /**
- * @desc key 为源对象, value 为每次更新的依赖的缓存
+ * @desc key 为源对象, value 为源对象中 键以及键的缓存
  */
 const targetMap = new WeakMap<any, KeyToDepMap>();
 
@@ -15,8 +15,12 @@ export namespace Effect {
 export class ReactiveEffect<T = any> {
   constructor(
     // 这里的注册的fn 为在更新ReactiveEffect时触发
-    public fn: () => T,
-  ) {}
+    /** @rerun */ fn: () => T,
+  ) {
+    // https://github.com/swc-project/swc/issues/9418
+    this.fn = fn;
+  }
+  fn: () => T;
   // 触发 fn运行
   run() {
     // 在执行 fn 之前保存 (模块的)activeEffect，并在执行完后恢复它。

@@ -11,6 +11,7 @@ import PlayVue from "./components/PlayVue.vue";
   <main class="outline-2 outline-solid outline-blue-200">
     <div class="wujie-box hover:border-blue-500">
       <AffVue />
+      <!-- ^? -->
     </div>
     <hr />
     <div class="wujie-box hover:border-blue-500">

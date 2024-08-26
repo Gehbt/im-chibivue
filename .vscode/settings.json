@@ -13,6 +13,7 @@
   "editor.codeActionsOnSave": {
     "source.fixAll": "explicit"
   },
+  "workbench.colorTheme": "One Dark Pro Mix",
   "editor.formatOnSave": true,
   "[typescript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"

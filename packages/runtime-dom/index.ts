@@ -11,12 +11,12 @@ const createAppMeta = createAppAPI(render);
 // 包装后的 createApp
 export const createApp: CreateAppFunction<Element> = (rootComponent) => {
   const app = createAppMeta(rootComponent);
-  const { mount } = app;
+  const { mount: oldMount } = app;
   // 重写(修饰) mount 方法，
-  app.mount = (selector: string) => {
+  app.mount = function overrideMount(selector: string) {
     const container = document.querySelector(selector);
     if (!container) return;
-    mount(container);
+    oldMount(container);
   };
 
   return app;

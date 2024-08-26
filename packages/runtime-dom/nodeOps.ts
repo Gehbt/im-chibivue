@@ -11,7 +11,7 @@ export const nodeOps: NodeOperationType = {
   /**
    * @desc 裸的 text 节点
    */
-  createText: (text: string) => {
+  createText: (text) => {
     return document.createTextNode(text);
   },
   /**
@@ -20,8 +20,21 @@ export const nodeOps: NodeOperationType = {
   setElementText(node, text) {
     node.textContent = text;
   },
-
-  insert(child, parent, anchor) {
-    parent.insertBefore(child, anchor || null);
+  /**
+   * @desc 插入节点(前插 | 后插)
+   */
+  insert(child, parent, anchor, option?) {
+    // option 暂未使用到
+    if (option && option.toPost) {
+      parent.appendChild(child);
+    } else {
+      parent.insertBefore(child, anchor || null);
+    }
+  },
+  /**
+   * @desc 原始的插入节点的文本内容
+   */
+  setText(node, text) {
+    node.nodeValue = text;
   },
 };

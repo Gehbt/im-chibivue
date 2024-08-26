@@ -1,7 +1,3 @@
-// ~/packages/runtime-core apiCreateApp.ts
-
-// ~/packages/runtime-core apiCreateApp.ts
-import { ReactiveEffect } from "../reactivity";
 import type { Component } from "./component";
 import type { RootRenderFunction } from "./renderer";
 
@@ -21,18 +17,7 @@ export function createAppAPI<HostElement>(
   return function createApp(rootComponent) {
     const app: App<HostElement> = {
       mount(rootContainer: HostElement) {
-        // 得到渲染函数
-        const componentRender = rootComponent.setup!();
-
-        const updateComponent = () => {
-          // 先渲染 根节点
-          const root_vnode = componentRender();
-          render(root_vnode, rootContainer);
-        };
-
-        // MARK: effect
-        const effect = new ReactiveEffect(updateComponent);
-        effect.run();
+        render(rootComponent, rootContainer);
       },
       unmount() {
         // TODO: unmount
