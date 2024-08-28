@@ -10,7 +10,7 @@ export const mutableHandlersMaker: <T extends object>(
     // #region  doTrack
     // 在 get 前, 跟踪 effect
     (() => {
-      // 读的时候 lazy
+      // 读的时候 lazy get
       // -- 检查单个属性的 dirty flag，刷新这个属性
       track(target, key);
     })();
@@ -30,7 +30,7 @@ export const mutableHandlersMaker: <T extends object>(
     // #region doTrigger
     // 在 set 后, 触发 effect
     (() => {
-      // 写的时候 eager 更新
+      // set 的时候 eager 更新
       if (hasChanged(value, oldValue)) {
         trigger(target, key);
       }

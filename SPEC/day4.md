@@ -1,5 +1,6 @@
 ```mermaid
   flowchart LR
+    render --> patch
     patch --> processText
     patch --> processElement
     subgraph processTextBlock["Text"]
@@ -28,7 +29,5 @@
       end
       patchElement --> patchChildren
       patchElement --> DOM::hostPatchProp
-
-
     end
 ```

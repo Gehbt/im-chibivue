@@ -6,7 +6,7 @@ export const TextNode: unique symbol = Symbol();
 export type TextNodeSymbol = typeof TextNode;
 
 type VNodeChildAtom = VNode | string;
-export type VNodeChild = VNodeChildAtom | VNodeArrayChildren;
+export type VNodeChild = VNodeChildAtom; // | VNodeArrayChildren;
 export type VNodeArrayChildren = Array<VNodeArrayChildren | VNodeChildAtom>;
 
 // MARK: define VNode

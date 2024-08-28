@@ -7,10 +7,10 @@ type KeyToDepMap = Map<any, Dep>;
  */
 const targetMap = new WeakMap<any, KeyToDepMap>();
 
-// # Module Level Namespace
-export namespace Effect {
-  export let activeEffect: ReactiveEffect | undefined;
-}
+// # Module Level Namespace -- rolldown 还不支持
+export const Effect = {
+  activeEffect: undefined as ReactiveEffect | undefined,
+};
 // MARK: export
 export class ReactiveEffect<T = any> {
   constructor(
