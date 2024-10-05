@@ -12,7 +12,7 @@ const createAppMeta = createAppAPI(render);
 export const createApp: CreateAppFunction<Element> = (rootComponent) => {
   const app = createAppMeta(rootComponent);
   const { mount: oldMount } = app;
-  // 重写(修饰) mount 方法，
+  // 重写(修饰) mount 方法， 这段代码几乎表现了 vue 的本质, 加层
   app.mount = function overrideMount(selector: string) {
     const container = document.querySelector(selector);
     if (!container) return;

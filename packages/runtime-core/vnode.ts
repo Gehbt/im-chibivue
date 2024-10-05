@@ -1,3 +1,5 @@
+import type { ComponentInternalInstance } from "./component";
+
 export type VNodeTypes = string | TextNodeSymbol;
 export interface VNodeProps {
   [key: string]: any;
@@ -17,16 +19,18 @@ export interface VNode<HostNode = any> {
   children: VNodeNormalizedChildren;
   // real element
   el: HostNode | undefined;
+
+  component: ComponentInternalInstance | null;
 }
 export interface VNodeText<HostNode = any> extends VNode<HostNode> {
-  /** @override */ type: TextNodeSymbol;
-  /** @override */ props: null;
-  /** @override */ children: string;
+  /** @override VNode */ type: TextNodeSymbol;
+  /** @override VNode */ props: null;
+  /** @override VNode */ children: string;
 }
 export interface VNodeElement<HostNode = any> extends VNode<HostNode> {
-  /** @override */ type: string;
-  /** @override */ props: VNodeProps;
-  /** @override */ children: VNodeArrayChildren;
+  /** @override VNode */ type: string;
+  /** @override VNode */ props: VNodeProps;
+  /** @override VNode */ children: VNodeArrayChildren;
 }
 /// createVNode
 // TEXT
@@ -52,13 +56,19 @@ export function createVNode(
   props: VNodeProps | null,
   children: VNodeNormalizedChildren,
 ): VNode {
-  const vnode: VNode = { type, props, children, el: undefined };
+  const vnode: VNode = {
+    type,
+    props,
+    children,
+    el: undefined,
+    component: null,
+  };
   return vnode;
 }
 
 export function normalizeVNode(child: VNodeChild): VNode {
   if (typeof child === "object") {
-    return { ...child } as VNode;
+    return { ...child };
   } else {
     return createVNode(TextNode, null, String(child));
   }

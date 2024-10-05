@@ -1,6 +1,11 @@
 // 负责渲染
 import { ReactiveEffect } from "../reactivity";
-import type { Component } from "./component";
+import {
+  createComponentInstance,
+  type Component,
+  type ComponentInternalInstance,
+  type InternalRenderFunction,
+} from "./component";
 import {
   normalizeVNode,
   TextNode,
@@ -8,13 +13,6 @@ import {
   type VNodeElement,
   type VNodeText,
 } from "./vnode";
-// #region  定义渲染 接口
-export interface RendererNode {
-  [key: string]: any;
-}
-
-export interface RendererElement extends RendererNode {}
-// #endregion
 
 // MARK:  定义渲染函数 接口
 export type RootRenderFunction<HostElement = RendererElement> = (
@@ -40,6 +38,10 @@ export interface RendererOptions<
    */
   createText(text: string): HostNode;
   /**
+   * @desc 原始的插入节点的文本内容
+   */
+  setText(node: HostNode, text: string): void;
+  /**
    * @desc 插入节点(前插 | 后插)
    */
   insert(
@@ -52,11 +54,17 @@ export interface RendererOptions<
    * @desc 原始的插入节点的文本内容
    */
   setElementText(node: HostNode, text: string): void;
-  /**
-   * @desc 原始的插入节点的文本内容
-   */
-  setText(node: HostNode, text: string): void;
+
+  parentNode(node: HostNode): HostNode | null;
 }
+
+// #region  定义渲染 接口
+export interface RendererNode {
+  [key: string]: any;
+}
+
+export interface RendererElement extends RendererNode {}
+// #endregion
 
 /**
  * @desc 渲染的工厂函数
@@ -69,17 +77,23 @@ export function createRenderer(options: RendererOptions) {
     // TextNode
     createText: hostCreateText,
     setText: hostSetText,
+    // act
     insert: hostInsert,
+    parentNode: hostParentNode,
   } = options;
 
   const patch = (n1: VNode | null, n2: VNode, container: RendererElement) => {
     const { type } = n2;
     if (type === TextNode) {
-      /** @assert n1 is VNodeText | null, n2 id VNodeText */
+      /** @assert n1 is VNodeText | null, n2 is VNodeText */
       processText(n1 as VNodeText | null, n2 as VNodeText, container);
-    } else {
-      /** @assert n1 is VNodeElement | null, n2 id VNodeElement */
+    } else if (typeof type === "string") {
+      /** @assert n1 is VNodeElement | null, n2 is VNodeElement */
       processElement(n1 as VNodeElement | null, n2 as VNodeElement, container);
+    } else if (typeof type === "object") {
+      processComponent(n1, n2, container);
+    } else {
+      // noop or todo?
     }
   };
 
@@ -162,6 +176,73 @@ export function createRenderer(options: RendererOptions) {
         hostSetText(el, n2.children);
       }
     }
+  };
+
+  const processComponent = (
+    n1: VNode | null,
+    n2: VNode,
+    container: RendererElement,
+  ) => {
+    if (n1 == null) {
+      mountComponent(n2, container);
+    } else {
+      updateComponent(n1, n2);
+    }
+  };
+  const mountComponent = (initialVNode: VNode, container: RendererElement) => {
+    const instance: ComponentInternalInstance = (initialVNode.component =
+      createComponentInstance(initialVNode));
+
+    const component = initialVNode.type as Component;
+    if (component.setup) {
+      instance.render = component.setup() as InternalRenderFunction;
+    }
+    // 启动重新计算
+    setupRenderEffect(instance, initialVNode, container);
+  };
+
+  const setupRenderEffect = (
+    instance: ComponentInternalInstance,
+    initialVNode: VNode,
+    container: RendererElement,
+  ) => {
+    const componentUpdateFn = () => {
+      const { render } = instance;
+      if (!instance.isMounted) {
+        const subTree = (instance.subTree = normalizeVNode(render()));
+        patch(null, subTree, container);
+        initialVNode.el = subTree.el;
+        instance.isMounted = true;
+      } else {
+        let { next, vnode } = instance;
+
+        if (next) {
+          next.el = vnode.el;
+          next.component = instance;
+          instance.vnode = next;
+          instance.next = null;
+        } else {
+          next = vnode;
+        }
+
+        const prevTree = instance.subTree;
+        const nextTree = normalizeVNode(render());
+        instance.subTree = nextTree;
+
+        patch(prevTree, nextTree, hostParentNode(prevTree.el!)!);
+        next.el = nextTree.el;
+      }
+    };
+
+    const effect = (instance.effect = new ReactiveEffect(componentUpdateFn));
+    const update = (instance.update = () => effect.run());
+    update();
+  };
+
+  const updateComponent = (n1: VNode, n2: VNode) => {
+    const instance = (n2.component = n1.component!);
+    instance.next = n2;
+    instance.update();
   };
   // MARK: render main
   const render: RootRenderFunction = (rootComponent, container) => {

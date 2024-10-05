@@ -1,5 +1,5 @@
-import { type ReactiveEffect } from "./effect";
-
+import type { ReactiveEffect } from "./effect";
+// Dependency set
 export type Dep = Set<ReactiveEffect>;
 
 /**
@@ -7,6 +7,6 @@ export type Dep = Set<ReactiveEffect>;
  */
 export const createDep = (effects?: ReactiveEffect[]): Dep => {
   const dep: Dep = new Set<ReactiveEffect>(effects);
-  // TODO: more
+  // TODO: more?
   return dep;
 };

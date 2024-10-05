@@ -6,7 +6,7 @@ export default defineConfig({
     banner: "// @ts-nocheck",
     format: "esm",
     dir: "dist",
-    entryFileNames: "entry-[name]-[hash].js",
+    entryFileNames: "entry-[name].js",
     chunkFileNames: "chunk-[contenthash:8].js",
     exports: "named",
   },

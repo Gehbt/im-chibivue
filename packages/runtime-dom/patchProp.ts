@@ -1,9 +1,8 @@
+import type { RendererOptions } from "../runtime-core";
 // #region import utils
 import { patchAttr } from "./modules/attrs";
 import { patchEvent } from "./modules/events";
 // #endregion
-
-import type { RendererOptions } from "../runtime-core";
 
 type DOMRendererOptions = RendererOptions<Node, Element>;
 

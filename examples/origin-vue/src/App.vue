@@ -1,6 +1,11 @@
 <script setup lang="ts">
-import AffVue from "./components/AffVue.vue";
-import PlayVue from "./components/PlayVue.vue";
+import { computed, getCurrentScope } from "vue";
+import { AffVue, PlayVue } from "./components";
+
+const count = () => 1;
+const scope = getCurrentScope();
+
+const items = Array.from<number>({ length: count() }).fill(Math.random() * 2);
 </script>
 
 <template>
@@ -18,6 +23,14 @@ import PlayVue from "./components/PlayVue.vue";
       <PlayVue />
     </div>
   </main>
+  <div v-for="(item, index) in items" :key="count() + index">
+    <template v-if="item > 1">
+      <div>({{ index }}) lg 1</div>
+    </template>
+    <template v-else>
+      <div>({{ index }}) lt 1</div>
+    </template>
+  </div>
 </template>
 
 <style scoped>

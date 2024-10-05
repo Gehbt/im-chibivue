@@ -1,6 +1,3 @@
-import type { AnyFunction } from "../../shared";
-
-type EventFunction = AnyFunction;
 /**
  * @desc 就像一个 事件的Ref
  * @desc 注意: 是 callable 对象
@@ -8,12 +5,9 @@ type EventFunction = AnyFunction;
 interface Invoker extends EventListener {
   value: EventFunction;
 }
-interface VueSignElement extends Element {
-  /**
-   * @desc vei = vue event invokers -- 其实是个 map, 用来
-   * */
-  _vei?: Record<string, Invoker | undefined>;
-}
+
+interface EventFunction extends Function {}
+
 // #region 注册事件
 export function addEventListener(
   el: Element,
@@ -32,6 +26,13 @@ export function removeEventListener(
 }
 // #endregion
 
+interface VueSignElement extends Element {
+  /**
+   * @desc vei = vue event invokers -- 其实是个 map(用作映射), 用来
+   * */
+  _vei?: Record<string, Invoker | undefined>;
+}
+
 // #region 主功能
 export function patchEvent(
   el: VueSignElement,
@@ -39,7 +40,7 @@ export function patchEvent(
   value: EventFunction | null,
 ) {
   const invokers = el._vei || (el._vei = {});
-  //# 单例模式
+  // 类似单例
   const existingInvoker = invokers[rawName];
 
   if (value && existingInvoker) {

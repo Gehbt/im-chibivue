@@ -1,21 +1,27 @@
-import { type Dep, createDep } from "./dep";
+import { createDep } from "./dep";
+import type { Dep } from "./dep";
 
-// target -> key -> dep
+/**
+ * @desc target(WeakMap) -> key(Map) -> dep(Set)
+ */
 type KeyToDepMap = Map<any, Dep>;
 /**
  * @desc key 为源对象, value 为源对象中 键以及键的缓存
  */
 const targetMap = new WeakMap<any, KeyToDepMap>();
 
-// # Module Level Namespace -- rolldown 还不支持
-export const Effect = {
-  activeEffect: undefined as ReactiveEffect | undefined,
+type ModuleLevelEffect = {
+  activeEffect: ReactiveEffect | undefined;
 };
-// MARK: export
+// # Module Level Namespace -- rolldown 还不支持 导出namespace
+export const ModuleEffect: ModuleLevelEffect = {
+  activeEffect: undefined,
+};
+// MARK: ReactiveEffect
 export class ReactiveEffect<T = any> {
   constructor(
-    // 这里的注册的fn 为在更新ReactiveEffect时触发
-    /** @rerun */ fn: () => T,
+    // 这里的注册的fn 为计算函数, 在更新ReactiveEffect时触发
+    /** @rerun calculate */ fn: () => T,
   ) {
     // https://github.com/swc-project/swc/issues/9418
     this.fn = fn;
@@ -24,10 +30,10 @@ export class ReactiveEffect<T = any> {
   // 触发 fn运行
   run() {
     // 在执行 fn 之前保存 (模块的)activeEffect，并在执行完后恢复它。
-    let saveAffect: ReactiveEffect | undefined = Effect.activeEffect;
-    Effect.activeEffect = this;
+    let saveAffect: ReactiveEffect | undefined = ModuleEffect.activeEffect;
+    ModuleEffect.activeEffect = this;
     const res = this.fn();
-    Effect.activeEffect = saveAffect;
+    ModuleEffect.activeEffect = saveAffect;
     return res;
   }
   get [Symbol.toStringTag]() {
@@ -39,22 +45,22 @@ export class ReactiveEffect<T = any> {
 export function track(target: object, key: PropertyKey): void {
   let depsMap = targetMap.get(target);
   let dep: Dep | undefined;
-
+  // 未建立 map
   if (!depsMap) {
     targetMap.set(target, (depsMap = new Map()));
   } else {
     // 查询, 可能没有
     dep = depsMap.get(key);
   }
-
+  // 没有依赖 建立
   if (!dep) {
     dep = createDep();
   }
-
+  // 设置 依赖
   depsMap.set(key, dep);
 
-  if (Effect.activeEffect) {
-    dep.add(Effect.activeEffect);
+  if (ModuleEffect.activeEffect) {
+    dep.add(ModuleEffect.activeEffect);
   }
 }
 
@@ -67,7 +73,7 @@ export function trigger(target: object, key?: PropertyKey): void {
   const dep = depsMap.get(key);
   if (!dep) return;
 
-  const effects = [...dep];
+  const effects = /* cloned! */ [...dep];
   for (const effect of effects) {
     effect.run();
   }

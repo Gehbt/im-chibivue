@@ -4,7 +4,7 @@ type ProxyFunction<T extends object> = (target: T) => /* be proxy */ T;
 
 export const mutableHandlersMaker: <T extends object>(
   reactive: ProxyFunction<T>,
-) => ProxyHandler<T> = (reactive) => ({
+) => ProxyHandler<T> = (reactive: ProxyFunction<any>) => ({
   get(target: object, key, receiver: object): any {
     if (key === Symbol.toStringTag) return "Reactive";
     // #region  doTrack
@@ -17,7 +17,7 @@ export const mutableHandlersMaker: <T extends object>(
     // #endregion
     const res = Reflect.get(target, key, receiver);
 
-    if (res !== null && typeof res === "object") {
+    if (isNonNullObject(res)) {
       return reactive(res);
     } else {
       return res;
@@ -40,9 +40,10 @@ export const mutableHandlersMaker: <T extends object>(
   },
 });
 
-function hasChanged(
-  value: unknown,
-  oldValue: unknown,
-): value is typeof oldValue {
+function isNonNullObject(obj: unknown): obj is object {
+  return obj !== null && typeof obj === "object";
+}
+
+function hasChanged(value: unknown, oldValue: unknown): boolean {
   return !Object.is(value, oldValue);
 }

@@ -1,3 +1,39 @@
+import type { ReactiveEffect } from "../reactivity";
 import type { ComponentOptions } from "./componentOptions";
-interface Component extends ComponentOptions {}
-export type { Component };
+import type { VNode, VNodeChild } from "./vnode";
+
+export interface Component extends ComponentOptions {}
+// VDom 树(runtime层面)
+export interface ComponentInternalInstance {
+  type: Component;
+  vnode: VNode;
+  subTree: VNode;
+  next: VNode | null;
+  effect: ReactiveEffect;
+  render: InternalRenderFunction;
+  update: () => void;
+  isMounted: boolean;
+}
+
+export interface InternalRenderFunction {
+  (): VNodeChild;
+}
+// 构造 组件实例
+export function createComponentInstance(
+  vnode: VNode,
+): ComponentInternalInstance {
+  const type = vnode.type as Component;
+
+  const instance: ComponentInternalInstance = {
+    type,
+    vnode,
+    next: null,
+    effect: null as never,
+    subTree: null as never,
+    update: null as never,
+    render: null as never,
+    isMounted: false,
+  };
+
+  return instance;
+}
