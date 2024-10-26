@@ -1,6 +1,6 @@
 {
   "name": "chibivue",
-  "version": "0.5.0",
+  "version": "1.5.0",
   "private": true,
   "description": "chibivue repository",
   "scripts": {
@@ -25,6 +25,7 @@
   "devDependencies": {
     "@types/node": "^20.17.1",
     "@unocss/preset-uno": "^0.63.6",
+    "bumpp": "^9.7.1",
     "dpdm": "^3.14.0",
     "knip": "^5.34.0",
     "pnpm-workspace-graph": "^0.2.1",
@@ -37,8 +38,7 @@
     "turbo": "^2.2.3",
     "typescript": "^5.6.3",
     "unocss": "^0.63.6",
-    "vue-tsc": "^2.1.6",
-    "bumpp": "^9.7.1"
+    "vue-tsc": "^2.1.6"
   },
   "packageManager": "pnpm@9.12.2",
   "pnpm": {
