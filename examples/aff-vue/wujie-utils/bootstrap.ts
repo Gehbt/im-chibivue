@@ -1,4 +1,4 @@
-import { App as VueApp } from "vue";
+import type { App as VueApp } from "vue";
 
 export function bootstrapWujie(app: () => VueApp<Element>): boolean {
   if (window.__POWERED_BY_WUJIE__) {

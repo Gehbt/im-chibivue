@@ -1,0 +1,12 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "allowJs": true,
+    "outDir": "dist",
+    "module": "Preserve",
+    "moduleResolution": "Bundler",
+    "composite": true,
+    "noEmit": false
+  },
+  "include": ["scripts", "rolldown.config.mjs"]
+}

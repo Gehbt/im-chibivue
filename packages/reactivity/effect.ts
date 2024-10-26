@@ -73,8 +73,8 @@ export function trigger(target: object, key?: PropertyKey): void {
   const dep = depsMap.get(key);
   if (!dep) return;
 
-  const effects = /* cloned! */ [...dep];
-  for (const effect of effects) {
+  // const effects = /* cloned! */ [...dep];
+  for (const effect of dep) {
     effect.run();
   }
 }

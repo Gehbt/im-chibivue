@@ -96,5 +96,7 @@
     "flags": [
       "unstable_ts_config"
     ]
-  }
+  },
+  "references.preferredLocation": "peek",
+  "pnpmCatalogLens.enabled": true
 }

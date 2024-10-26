@@ -1,4 +1,4 @@
-import { App as VueApp } from "chibivue";
+import type { App as VueApp } from "chibivue";
 
 export function bootstrapWujie(app: () => VueApp<Element>): boolean {
   if (window.__POWERED_BY_WUJIE__) {

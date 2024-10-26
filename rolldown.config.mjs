@@ -1,4 +1,11 @@
+import path from "path";
 import { defineConfig } from "rolldown";
+/**
+ * @param  {...string} src
+ * @returns
+ */
+const p2 = (...src) => path.resolve(import.meta.dirname, ...src);
+
 export default defineConfig({
   input: "./packages/index.ts",
   plugins: [],
@@ -10,6 +17,6 @@ export default defineConfig({
     chunkFileNames: "chunk-[contenthash:8].js",
     exports: "named",
   },
-  cwd: import.meta.dirname,
+  cwd: p2(),
   treeshake: true,
 });
