@@ -1,6 +1,8 @@
 import type { RendererOptions } from "../runtime-core";
 type NodeOperationType = Omit<RendererOptions<Node, Element>, "patchProp">;
 // 处理各种类型节点的函数
+// - 有返回值的成员的都设置为 property,
+// - 没有返回值的都设置为 method
 export const nodeOps: NodeOperationType = {
   /**
    * @desc 通过 tagName 创建元素
@@ -44,4 +46,3 @@ export const nodeOps: NodeOperationType = {
     return node.parentNode;
   },
 };
-/// 有返回的成员的都是 property, 没有的都是 method

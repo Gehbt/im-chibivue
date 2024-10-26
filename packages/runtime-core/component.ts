@@ -2,7 +2,7 @@ import type { ReactiveEffect } from "../reactivity";
 import type { ComponentOptions } from "./componentOptions";
 import type { VNode, VNodeChild } from "./vnode";
 
-export interface Component extends ComponentOptions {}
+export type Component = ComponentOptions;
 // VDom 树(runtime层面)
 export interface ComponentInternalInstance {
   type: Component;
@@ -28,10 +28,10 @@ export function createComponentInstance(
     type,
     vnode,
     next: null,
-    effect: null as never,
-    subTree: null as never,
-    update: null as never,
-    render: null as never,
+    effect: null!,
+    subTree: null!,
+    update: null!,
+    render: null!,
     isMounted: false,
   };
 

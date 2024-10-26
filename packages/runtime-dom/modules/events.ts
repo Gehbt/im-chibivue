@@ -56,7 +56,7 @@ export function patchEvent(
     } else if (existingInvoker) {
       // remove
       removeEventListener(el, eventName, existingInvoker);
-      delete invokers[rawName];
+      Reflect.deleteProperty(invokers, rawName);
     }
   }
 }

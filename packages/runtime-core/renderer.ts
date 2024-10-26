@@ -7,6 +7,7 @@ import {
   type InternalRenderFunction,
 } from "./component";
 import {
+  createVNode,
   normalizeVNode,
   TextNode,
   type VNode,
@@ -200,16 +201,19 @@ export function createRenderer(options: RendererOptions) {
     // 启动重新计算
     setupRenderEffect(instance, initialVNode, container);
   };
-
+  // 触发effect, 更新元素
   const setupRenderEffect = (
     instance: ComponentInternalInstance,
     initialVNode: VNode,
     container: RendererElement,
   ) => {
     const componentUpdateFn = () => {
+      // 这里捕获了原本的 渲染方法
       const { render } = instance;
       if (!instance.isMounted) {
-        const subTree = (instance.subTree = normalizeVNode(render()));
+        // 没挂载, 只存在于 vnode 里
+        const subTree = normalizeVNode(render());
+        instance.subTree = subTree;
         patch(null, subTree, container);
         initialVNode.el = subTree.el;
         instance.isMounted = true;
@@ -244,22 +248,12 @@ export function createRenderer(options: RendererOptions) {
     instance.next = n2;
     instance.update();
   };
+
   // MARK: render main
   const render: RootRenderFunction = (rootComponent, container) => {
     // 运行渲染函数
-    const componentRender = rootComponent.setup!();
-
-    // n1 代表副本, 判断是否 重复渲染
-    let n1: VNode | null = null;
-    const updateComponent = () => {
-      const n2: VNode<any> = componentRender();
-      patch(n1, n2, container);
-      n1 = n2;
-    };
-
-    // effect
-    const effect = new ReactiveEffect(updateComponent);
-    effect.run();
+    const vnode = createVNode(rootComponent, {}, []);
+    patch(null, vnode, container);
   };
 
   return { render };

@@ -1,6 +1,6 @@
 import type { ComponentInternalInstance } from "./component";
 
-export type VNodeTypes = string | TextNodeSymbol;
+export type VNodeTypes = string | TextNodeSymbol | object;
 export interface VNodeProps {
   [key: string]: any;
 }
@@ -51,6 +51,7 @@ export function createVNode(
   props: VNodeProps | null,
   children: VNodeNormalizedChildren,
 ): VNode;
+// impl
 export function createVNode(
   type: VNodeTypes,
   props: VNodeProps | null,
