@@ -5,31 +5,31 @@ export const nodeOps: NodeOperationType = {
   /**
    * @desc 通过 tagName 创建元素
    */
-  createElement: (tagName) => {
+  createElement: (tagName): Element => {
     return document.createElement(tagName);
   },
   /**
    * @desc 裸的 text 节点
    */
-  createText: (text) => {
+  createText: (text): Node => {
     return document.createTextNode(text);
   },
   /**
    * @desc 原始的插入节点的文本内容
    */
-  setText(node, text) {
+  setText(node, text): void {
     node.nodeValue = text;
   },
   /**
    * @desc 原始的插入节点的文本内容
    */
-  setElementText(node, text) {
+  setElementText(node, text): void {
     node.textContent = text;
   },
   /**
    * @desc 插入节点(前插 | 后插)
    */
-  insert(child, parent, anchor, option?) {
+  insert(child, parent, anchor, option?): void {
     // 注意: option (使用处)暂未使用到
     if (option && option.toPost) {
       parent.appendChild(child);
@@ -40,7 +40,7 @@ export const nodeOps: NodeOperationType = {
   /**
    * @desc 获取父节点
    */
-  parentNode: (node) => {
+  parentNode: (node): ParentNode | null => {
     return node.parentNode;
   },
 };

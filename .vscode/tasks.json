@@ -1,0 +1,28 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "type": "shell",
+      "label": "Run this .ts by `tsx`",
+      "command": "tsx",
+      "args": [
+        "${relativeFile}",
+      ],
+      "options": {
+        "cwd": "${cwd}",
+        "shell": {
+          "executable": "pwsh.exe",
+          "args": [
+            "-NoProfile",
+            "-Command"
+          ]
+        }
+      },
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "detail": "run .ts",
+    },
+  ],
+}

@@ -1,6 +1,6 @@
-import { h, reactive } from "chibivue";
+import { defineComponent, h, reactive } from "vue";
 
-const App = {
+const App = defineComponent({
   setup() {
     const state = reactive({ count: 0 });
     const increment = () => {
@@ -8,10 +8,10 @@ const App = {
     };
     return function render() {
       return h("div", { id: "my-app" }, [
-        h("p", {}, [`count: ${state.count}`]),
+        h("p", null, [`count: ${state.count}`]),
         h("button", { onClick: increment }, ["increment"]),
       ]);
     };
   },
-};
+});
 export default App;

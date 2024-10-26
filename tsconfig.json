@@ -1,7 +1,13 @@
 {
+  "references": [
+    {
+      "path": "./tsconfig.script.json"
+    }
+  ],
   "compilerOptions": {
     "target": "ES2020",
-    "module": "ES2020",
+    "module": "Preserve",
+    "moduleResolution": "Bundler",
     "lib": ["DOM"],
     "strict": true,
     "strictFunctionTypes": true,
@@ -12,11 +18,12 @@
     "paths": {
       "chibivue": ["./packages"]
     },
-    "moduleResolution": "node",
     "allowJs": true,
     "esModuleInterop": true,
-    "verbatimModuleSyntax": true
+    "verbatimModuleSyntax": true,
+    "skipLibCheck": true,
+    "noEmit": true
   },
-  "include": ["packages/**/*.ts", "examples/**/**.ts"],
+  "include": ["packages/**/*.ts"],
   "exclude": ["node_modules", "dist"]
 }

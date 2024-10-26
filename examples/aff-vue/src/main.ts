@@ -1,8 +1,10 @@
 import { createApp } from "vue";
 import "./style.css";
-import App from "./App.vue";
+import App from "./App";
 import { bootstrapWujie } from "../wujie-utils/bootstrap";
+
 const app = () => createApp(App);
+
 bootstrapWujie(app);
 // 兼容非wujie环境
 if (!bootstrapWujie(app)) {
