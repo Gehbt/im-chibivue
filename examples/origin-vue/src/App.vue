@@ -23,7 +23,7 @@ const items = Array.from<number>({ length: count() }).fill(Math.random() * 2);
       <PlayVue />
     </div>
   </main>
-  <div v-for="(item, index) in items" :key="count() + index">
+  <div v-for="(item, index) in items" :key="`${count()}${index}`">
     <template v-if="item > 1">
       <div>({{ index }}) lg 1</div>
     </template>

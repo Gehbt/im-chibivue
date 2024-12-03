@@ -10,12 +10,12 @@
     "type-check": "vue-tsc -b --force"
   },
   "dependencies": {
-    "vue": "^3.5.12"
+    "vue": "^3.5.13"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^5.1.4",
+    "@vitejs/plugin-vue": "^5.2.1",
     "typescript": "catalog:",
     "vite": "catalog:",
-    "vue-tsc": "^2.1.6"
+    "vue-tsc": "^2.1.10"
   }
 }

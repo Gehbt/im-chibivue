@@ -98,5 +98,14 @@
     ]
   },
   "references.preferredLocation": "peek",
-  "pnpmCatalogLens.enabled": true
+  "pnpmCatalogLens.enabled": true,
+  "cSpell.ignorePaths": [
+    "package-lock.json",
+    "node_modules",
+    "vscode-extension",
+    ".git/objects",
+    ".vscode",
+    ".vscode-insiders",
+    "package.json"
+  ]
 }

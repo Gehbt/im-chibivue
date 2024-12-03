@@ -2,3 +2,7 @@
 
 
 </script>
+
+<template>
+  hidden
+</template>
