@@ -22,19 +22,13 @@
   "vscode-highlight-text.rules": {
     "vue": {
       "light": {
-        "purple": {
-          "match": [
-            "v-if",
-            "v-else-if",
-            "v-else"
-          ],
+        "#800080": {
+          "match": ["v-if", "v-else-if", "v-else"],
           "before": {
             "contentText": "✨"
           }
         },
-        "#B392F0": [
-          "v-for"
-        ],
+        "#B392F0": ["v-for"],
         "#FFC83D": [
           "<template\\s+(\\#[^\\s\\/>=]+)",
           "v-bind",
@@ -42,32 +36,25 @@
           "v-on",
           "(v-slot:[^>\\s\\/>]+)",
           "v-html",
-          "v-text"
+          "v-text",
+          "v-pre"
         ],
-        "rgb(99, 102, 241)": [
-          ":is"
-        ],
+        "rgb(99, 102, 241)": [":is"],
         "rgb(14, 165, 233)": [
-          "(defineProps)[<\\(]",
+          "(defineProps)(?=[<\\(])",
           "defineOptions",
-          "defineEmits",
-          "defineExpose"
+          "(defineEmits)(?=[<\\(])",
+          "(defineExpose)(?=[<\\(])"
         ]
       },
       "dark": {
-        "purple": {
-          "match": [
-            "v-if",
-            "v-else-if",
-            "v-else"
-          ],
+        "#800080": {
+          "match": ["v-if", "v-else-if", "v-else"],
           "before": {
-            "contentText": ""
+            "contentText": "🔱"
           }
         },
-        "#B392F0": [
-          "v-for"
-        ],
+        "#B392F0": ["v-for"],
         "#FFC83D": [
           "<template\\s+(\\#[^\\s\\/>=]+)",
           "v-bind",
@@ -78,24 +65,20 @@
           "v-text"
         ],
         "rgb(99, 102, 241)": {
-          "match": [
-            ":is"
-          ]
+          "match": [":is"]
         },
         "rgb(14, 165, 233)": [
-          "(defineProps)[<\\(]",
+          "(defineProps)(?=[<\\(])",
           "defineOptions",
-          "defineEmits",
-          "defineExpose"
+          "(defineEmits)(?=[<\\(])",
+          "(defineExpose)(?=[<\\(])"
         ]
       }
-    },
+    }
   },
   "typescript.tsdk": "node_modules\\typescript\\lib",
   "eslint.options": {
-    "flags": [
-      "unstable_ts_config"
-    ]
+    "flags": ["unstable_ts_config"]
   },
   "references.preferredLocation": "peek",
   "pnpmCatalogLens.enabled": true,

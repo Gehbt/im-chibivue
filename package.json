@@ -23,24 +23,25 @@
     "bumpp": "bumpp"
   },
   "devDependencies": {
-    "@types/node": "^20.17.9",
-    "@unocss/preset-uno": "^0.65.0",
-    "bumpp": "^9.8.1",
+    "@types/node": "^20.17.11",
+    "@unocss/preset-uno": "^0.65.3",
+    "bumpp": "^9.9.2",
     "dpdm": "^3.14.0",
-    "knip": "^5.39.1",
+    "knip": "^5.41.1",
     "pnpm-workspace-graph": "^0.2.1",
     "prettier": "3.3.3",
-    "rolldown": "^0.15.0",
+    "rolldown": "^1.0.0-beta.1",
     "simple-git-hooks": "^2.11.1",
     "skott": "^0.35.4",
+    "sonda": "^0.7.1",
     "stale-dep": "^0.7.0",
-    "tsc-shame": "^0.2.4",
+    "tsc-shame": "^0.2.14",
     "turbo": "^2.3.3",
-    "typescript": "~5.6.3",
-    "unocss": "^0.65.0",
-    "vue-tsc": "^2.1.10"
+    "typescript": "~5.7.2",
+    "unocss": "^0.65.3",
+    "vue-tsc": "^2.2.0"
   },
-  "packageManager": "pnpm@9.14.4",
+  "packageManager": "pnpm@9.15.2",
   "pnpm": {
     "overrides": {
       "is-core-module": "npm:@nolyfill/is-core-module@^1.0.39",
