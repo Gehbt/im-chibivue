@@ -23,31 +23,31 @@
     "bumpp": "bumpp"
   },
   "devDependencies": {
-    "@types/node": "^20.17.11",
-    "@unocss/preset-uno": "^0.65.3",
-    "bumpp": "^9.9.2",
+    "@types/node": "^22.15.34",
+    "@unocss/preset-uno": "^66.3.2",
+    "bumpp": "^10.2.0",
     "dpdm": "^3.14.0",
-    "knip": "^5.41.1",
+    "knip": "^5.61.3",
+    "npm-run-all2": "^8.0.4",
     "pnpm-workspace-graph": "^0.2.1",
-    "prettier": "3.3.3",
-    "rolldown": "^1.0.0-beta.1",
-    "simple-git-hooks": "^2.11.1",
+    "prettier": "3.5.3",
+    "rolldown": "^1.0.0-beta.22",
+    "simple-git-hooks": "^2.13.0",
     "skott": "^0.35.4",
-    "sonda": "^0.7.1",
-    "stale-dep": "^0.7.0",
+    "sonda": "^0.8.2",
+    "stale-dep": "^0.8.2",
     "tsc-shame": "^0.2.14",
-    "turbo": "^2.3.3",
-    "typescript": "~5.7.2",
-    "unocss": "^0.65.3",
-    "vue-tsc": "^2.2.0"
+    "turbo": "^2.5.4",
+    "typescript": "catalog:",
+    "unocss": "^66.3.2"
   },
-  "packageManager": "pnpm@9.15.2",
+  "packageManager": "pnpm@10.12.4",
   "pnpm": {
     "overrides": {
       "is-core-module": "npm:@nolyfill/is-core-module@^1.0.39",
-      "isarray": "npm:@nolyfill/isarray@^1.0.29",
-      "string.prototype.replaceall": "npm:@nolyfill/string.prototype.replaceall@^1.0.28",
-      "typedarray": "npm:@nolyfill/typedarray@^1.0.29"
+      "isarray": "npm:@nolyfill/isarray@^1.0.44",
+      "string.prototype.replaceall": "npm:@nolyfill/string.prototype.replaceall@^1.0.44",
+      "typedarray": "npm:@nolyfill/typedarray@^1.0.44"
     }
   },
   "simple-git-hooks": {

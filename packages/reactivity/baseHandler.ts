@@ -26,7 +26,7 @@ export const mutableHandlersMaker: <T extends object>(
 
   set(target: object, key, value: unknown, receiver: object): boolean {
     let oldValue = target[key as keyof typeof target];
-    Reflect.set(target, key, value, receiver);
+    const res = Reflect.set(target, key, value, receiver);
     // #region doTrigger
     // 在 set 后, 触发 effect
     (() => {
@@ -36,14 +36,19 @@ export const mutableHandlersMaker: <T extends object>(
       }
     })();
     // #endregion
-    return true;
+    return res;
   },
 });
 
-function isNonNullObject(obj: unknown): obj is object {
+function isNonNullObject<T extends object | null>(
+  obj: T,
+): obj is NonNullable<T> {
   return obj !== null && typeof obj === "object";
 }
 
+/**
+ * @desc 对比新旧值是否有变化
+ */
 function hasChanged(value: unknown, oldValue: unknown): boolean {
   return !Object.is(value, oldValue);
 }

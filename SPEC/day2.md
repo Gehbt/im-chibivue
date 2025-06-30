@@ -17,4 +17,4 @@ export function h(type, props, children) {
 这里的 patchProp 处理了 prop, 分为 attr 和 event 有分别的处理
 
 attr 用了 dom api 的 setAttribute
-event 转发了 event, 并且包装了 到了 \_vei对象(vue event map)上
+event 转发了 event, 并且包装了 到了 \_vei对象(vue event invoker)上

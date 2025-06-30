@@ -1,3 +1,4 @@
+// effect 是作用域
 import { createDep } from "./dep";
 import type { Dep } from "./dep";
 
@@ -6,6 +7,7 @@ import type { Dep } from "./dep";
  */
 type KeyToDepMap = Map<any, Dep>;
 /**
+ * @data
  * @desc key 为源对象, value 为源对象中 键以及键的缓存
  */
 const targetMap = new WeakMap<any, KeyToDepMap>();
@@ -13,7 +15,8 @@ const targetMap = new WeakMap<any, KeyToDepMap>();
 type ModuleLevelEffect = {
   activeEffect: ReactiveEffect | undefined;
 };
-// # Module Level Namespace -- rolldown 还不支持 导出namespace
+// # Module Level Variable
+// 利用模块的特性, 使得同时只会有一个
 export const ModuleEffect: ModuleLevelEffect = {
   activeEffect: undefined,
 };
@@ -21,12 +24,10 @@ export const ModuleEffect: ModuleLevelEffect = {
 export class ReactiveEffect<T = any> {
   constructor(
     // 这里的注册的fn 为计算函数, 在更新ReactiveEffect时触发
-    /** @rerun calculate */ fn: () => T,
+    /** @effectFn recalculate */ public fn: () => T,
   ) {
     // https://github.com/swc-project/swc/issues/9418
-    this.fn = fn;
   }
-  fn: () => T;
   // 触发 fn运行
   run() {
     // 在执行 fn 之前保存 (模块的)activeEffect，并在执行完后恢复它。
@@ -36,6 +37,9 @@ export class ReactiveEffect<T = any> {
     ModuleEffect.activeEffect = saveAffect;
     return res;
   }
+  /**
+   * @ignore
+   */
   get [Symbol.toStringTag]() {
     return "ReactiveEffect";
   }
@@ -43,6 +47,7 @@ export class ReactiveEffect<T = any> {
 
 // 跟踪: 注入 dep
 export function track(target: object, key: PropertyKey): void {
+  // 准备: 获取依赖图
   let depsMap = targetMap.get(target);
   let dep: Dep | undefined;
   // 未建立 map

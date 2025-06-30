@@ -6,11 +6,16 @@ import { patchEvent } from "./modules/events";
 
 type DOMRendererOptions = RendererOptions<Node, Element>;
 
-const onRE = /^on[^a-z]/;
-export const isOn = (key: string) => onRE.test(key);
+export const isOn = (key: string) => /^on[^a-z]/.test(key);
+// 缺点是需要更高的es版本
+export const isOn2 = (key: string) => key.startsWith("on");
+
+export const isOnLow = (key: string) => key.length > 2 && key[0] === "o" && key[1] === "n";
+
+
 
 export const patchProp: DOMRendererOptions["patchProp"] = (el, key, value) => {
-  if (isOn(key)) {
+  if (isOnLow(key)) {
     patchEvent(el, key, value);
   } else {
     patchAttr(el, key, value);

@@ -1,5 +1,8 @@
 packages:
   - examples/*
 catalog:
-  typescript: ~5.7.2
-  vite: ^6.0.6
+  typescript: ~5.8.3
+  vite: ^7.0.0
+  vue-tsc: ^2.2.10
+  vue: ^3.5.17
+  "@vitejs/plugin-vue": ^6.0.0

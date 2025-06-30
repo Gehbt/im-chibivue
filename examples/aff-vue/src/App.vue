@@ -11,7 +11,7 @@ const increment = () => {
 
 <template>
   <div id="my-app">
-    <p>count: {{ state.count }}</p>
+    <p style="color: red;">count: {{ state.count }}</p>
     <button @click="increment">increment</button>
   </div>
 </template>

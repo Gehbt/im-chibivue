@@ -1,4 +1,5 @@
-export type AnyFunction = (...args: any[]) => unknown;
+export type Any = Function["arguments"];
+export type AnyFunction = (...args: Any[]) => unknown;
 // builtin
 // export type VoidFunction = (...args: any[]) => void;
 /** @async */

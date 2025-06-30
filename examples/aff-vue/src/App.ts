@@ -8,7 +8,15 @@ const App = defineComponent({
     };
     return function render() {
       return h("div", { id: "my-app" }, [
-        h("p", null, [`count: ${state.count}`]),
+        h(
+          "p",
+          {
+            style: {
+              color: "red",
+            },
+          },
+          [`count: ${state.count}`],
+        ),
         h("button", { onClick: increment }, ["increment"]),
       ]);
     };

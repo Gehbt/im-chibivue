@@ -8,7 +8,7 @@ const App = {
     };
     return function render() {
       return h("div", { id: "my-app" }, [
-        h("p", {}, [`count: ${state.count}`]),
+        h("p", { style: "color: red;" }, [`count: ${state.count}`]),
         h("button", { onClick: increment }, ["increment"]),
       ]);
     };

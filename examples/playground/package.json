@@ -16,6 +16,6 @@
     "vite": "catalog:"
   },
   "dependencies": {
-    "wujie-vue3": "^1.0.23"
+    "wujie-vue3": "^1.0.28"
   }
 }

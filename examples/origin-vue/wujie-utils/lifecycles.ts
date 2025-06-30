@@ -18,7 +18,7 @@ export const lifecycles = {
 } satisfies Partial<cacheOptions>;
 
 // function fib(n: number) {
-//   return fibIter(1, 0, 0, 1, n);
+//   return fibIter(1, 0, 0, 1, n); // [[1,0],[0,1]]
 // }
 // function fibIter(a: number, b: number, p: number, q: number, count: number) {
 //   if (count === 0) {

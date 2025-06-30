@@ -49,10 +49,10 @@
       },
       "dark": {
         "#800080": {
-          "match": ["v-if", "v-else-if", "v-else"],
-          "before": {
-            "contentText": "🔱"
-          }
+          "match": ["v-if", "v-else-if", "v-else"]
+          // "before": {
+          //   "contentText": "🔱"
+          // }
         },
         "#B392F0": ["v-for"],
         "#FFC83D": [
@@ -75,6 +75,9 @@
         ]
       }
     }
+  },
+  "files.associations": {
+    ".env": "properties"
   },
   "typescript.tsdk": "node_modules\\typescript\\lib",
   "eslint.options": {
