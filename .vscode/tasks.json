@@ -5,24 +5,19 @@
       "type": "shell",
       "label": "Run this .ts by `tsx`",
       "command": "tsx",
-      "args": [
-        "${relativeFile}",
-      ],
+      "args": ["${relativeFile}"],
       "options": {
         "cwd": "${cwd}",
         "shell": {
-          "executable": "pwsh.exe",
-          "args": [
-            "-NoProfile",
-            "-Command"
-          ]
+          "executable": "bash",
+          "args": []
         }
       },
       "group": {
         "kind": "build",
         "isDefault": true
       },
-      "detail": "run .ts",
-    },
-  ],
+      "detail": "run .ts"
+    }
+  ]
 }

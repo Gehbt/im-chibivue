@@ -7,7 +7,7 @@
 
 ```mermaid
   flowchart LR
-    vue["chibivue"]
+    vue["im-chibivue"]
     createAppFactory["createAppAPI"]
     rendererFactory["createRenderer"]
     nodeOperations["nodeOps"]

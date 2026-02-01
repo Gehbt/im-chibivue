@@ -34,11 +34,7 @@ export interface VNodeElement<HostNode = any> extends VNode<HostNode> {
 }
 /// createVNode
 // TEXT
-export function createVNode(
-  type: TextNodeSymbol,
-  props: null,
-  children: string,
-): VNodeText;
+export function createVNode(type: TextNodeSymbol, props: null, children: string): VNodeText;
 // ELEMENT
 export function createVNode(
   type: string,

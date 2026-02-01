@@ -22,10 +22,7 @@ export type RootRenderFunction<HostElement = RendererElement> = (
 ) => void;
 
 // 在dom里面才实现
-export interface RendererOptions<
-  HostNode = RendererNode,
-  HostElement = RendererElement,
-> {
+export interface RendererOptions<HostNode = RendererNode, HostElement = RendererElement> {
   /**
    * @desc 处理prop
    */
@@ -70,7 +67,9 @@ export interface RendererElement extends RendererNode {}
 /**
  * @desc 渲染的工厂函数
  */
-export function createRenderer(options: RendererOptions) {
+export function createRenderer(options: RendererOptions): {
+  render: RootRenderFunction<RendererElement>;
+} {
   const {
     // Element
     patchProp: hostPatchProp,
@@ -149,11 +148,7 @@ export function createRenderer(options: RendererOptions) {
     }
   };
 
-  const patchChildren = (
-    n1: VNodeElement,
-    n2: VNodeElement,
-    container: RendererElement,
-  ) => {
+  const patchChildren = (n1: VNodeElement, n2: VNodeElement, container: RendererElement) => {
     const c1 = n1.children as VNode[];
     const c2 = n2.children as VNode[];
 
@@ -163,11 +158,7 @@ export function createRenderer(options: RendererOptions) {
     }
   };
 
-  const processText = (
-    n1: VNodeText | null,
-    n2: VNodeText,
-    container: RendererElement,
-  ) => {
+  const processText = (n1: VNodeText | null, n2: VNodeText, container: RendererElement) => {
     if (n1 === null) {
       n2.el = hostCreateText(n2.children);
       hostInsert(n2.el, container);
@@ -179,11 +170,7 @@ export function createRenderer(options: RendererOptions) {
     }
   };
 
-  const processComponent = (
-    n1: VNode | null,
-    n2: VNode,
-    container: RendererElement,
-  ) => {
+  const processComponent = (n1: VNode | null, n2: VNode, container: RendererElement) => {
     if (n1 == null) {
       mountComponent(n2, container);
     } else {

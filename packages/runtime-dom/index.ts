@@ -1,8 +1,4 @@
-import {
-  type CreateAppFunction,
-  createAppAPI,
-  createRenderer,
-} from "../runtime-core";
+import { type CreateAppFunction, createAppAPI, createRenderer } from "../runtime-core";
 import { nodeOps } from "./nodeOps";
 import { patchProp } from "./patchProp";
 

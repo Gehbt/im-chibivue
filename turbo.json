@@ -4,16 +4,15 @@
     "dev": {
       "cache": false,
       "persistent": true,
-      "interactive": true
+      "interactive": true,
+      "interruptible": true
     },
     "type-check": {
-      "cache": true
+      "persistent": true
     },
     "build": {
       "cache": true,
-      "dependsOn": [
-        "^build"
-      ]
+      "dependsOn": ["^build"]
     }
   }
 }

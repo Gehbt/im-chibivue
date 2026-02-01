@@ -1,6 +1,7 @@
+import type { Dep } from "./dep";
+
 // effect 是作用域
 import { createDep } from "./dep";
-import type { Dep } from "./dep";
 
 /**
  * @desc target(WeakMap) -> key(Map) -> dep(Set)
@@ -12,14 +13,12 @@ type KeyToDepMap = Map<any, Dep>;
  */
 const targetMap = new WeakMap<any, KeyToDepMap>();
 
-type ModuleLevelEffect = {
-  activeEffect: ReactiveEffect | undefined;
-};
+// type ModuleLevelEffect = {
+//   activeEffect: ReactiveEffect | undefined;
+// };
 // # Module Level Variable
 // 利用模块的特性, 使得同时只会有一个
-export const ModuleEffect: ModuleLevelEffect = {
-  activeEffect: undefined,
-};
+export let activeEffect: undefined | ReactiveEffect;
 // MARK: ReactiveEffect
 export class ReactiveEffect<T = any> {
   constructor(
@@ -29,12 +28,12 @@ export class ReactiveEffect<T = any> {
     // https://github.com/swc-project/swc/issues/9418
   }
   // 触发 fn运行
-  run() {
+  run(): T {
     // 在执行 fn 之前保存 (模块的)activeEffect，并在执行完后恢复它。
-    let saveAffect: ReactiveEffect | undefined = ModuleEffect.activeEffect;
-    ModuleEffect.activeEffect = this;
+    let saveAffect: ReactiveEffect | undefined = activeEffect;
+    activeEffect = this;
     const res = this.fn();
-    ModuleEffect.activeEffect = saveAffect;
+    activeEffect = saveAffect;
     return res;
   }
   /**
@@ -64,8 +63,8 @@ export function track(target: object, key: PropertyKey): void {
   // 设置 依赖
   depsMap.set(key, dep);
 
-  if (ModuleEffect.activeEffect) {
-    dep.add(ModuleEffect.activeEffect);
+  if (activeEffect) {
+    dep.add(activeEffect);
   }
 }
 

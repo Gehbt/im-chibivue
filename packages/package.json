@@ -1,0 +1,17 @@
+{
+  "name": "im-chibivue",
+  "version": "0.1.5",
+  "private": true,
+  "description": "im-chibivue main",
+  "main": "./dist/im-chibivue.js",
+  "types": "./dist/im-chibivue.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/im-chibivue.d.ts",
+      "import": "./dist/im-chibivue.js"
+    }
+  },
+  "scripts": {
+    "build": "rolldown -c ./rolldown.config.mjs"
+  }
+}

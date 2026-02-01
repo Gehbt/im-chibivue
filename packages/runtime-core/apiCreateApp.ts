@@ -7,9 +7,7 @@ export interface App<HostElement = any> {
   unmount(): void;
 }
 
-export type CreateAppFunction<HostElement> = (
-  rootComponent: Component,
-) => App<HostElement>;
+export type CreateAppFunction<HostElement> = (rootComponent: Component) => App<HostElement>;
 
 export function createAppAPI<HostElement>(
   render: RootRenderFunction<HostElement>,

@@ -1,0 +1,14 @@
+
+digraph {
+	compound = "true"
+	newrank = "true"
+	subgraph "root" {
+		"[root] @im-chibivue/im-chibivue-playground#build" -> "[root] @im-chibivue/playground-shared#build"
+		"[root] @im-chibivue/im-chibivue-playground#build" -> "[root] im-chibivue#build"
+		"[root] @im-chibivue/original-plaground#build" -> "[root] @im-chibivue/playground-shared#build"
+		"[root] @im-chibivue/playground-shared#build" -> "[root] ___ROOT___"
+		"[root] @im-chibivue/spec-align#build" -> "[root] @im-chibivue/playground-shared#build"
+		"[root] im-chibivue#build" -> "[root] ___ROOT___"
+	}
+}
+

@@ -9,19 +9,11 @@ interface Invoker extends EventListener {
 interface EventFunction extends Function {}
 
 // #region 注册事件
-export function addEventListener(
-  el: Element,
-  event: string,
-  handler: EventListener,
-) {
+export function addEventListener(el: Element, event: string, handler: EventListener) {
   el.addEventListener(event, handler);
 }
 
-export function removeEventListener(
-  el: Element,
-  event: string,
-  handler: EventListener,
-) {
+export function removeEventListener(el: Element, event: string, handler: EventListener) {
   el.removeEventListener(event, handler);
 }
 // #endregion
@@ -34,11 +26,7 @@ interface VueSignElement extends Element {
 }
 
 // #region 主功能
-export function patchEvent(
-  el: VueSignElement,
-  rawName: string,
-  value: EventFunction | null,
-) {
+export function patchEvent(el: VueSignElement, rawName: string, value: EventFunction | null) {
   const invokers = el._vei || (el._vei = {});
   // 类似单例
   const existingInvoker = invokers[rawName];

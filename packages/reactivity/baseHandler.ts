@@ -1,6 +1,7 @@
 import { track, trigger } from "./effect";
-
-type ProxyFunction<T extends object> = (target: T) => /* be proxy */ T;
+declare const __proxied__: unique symbol;
+type Proxied<O> = O & { [__proxied__]?: 1 };
+type ProxyFunction<T extends object> = (target: T) => /* be proxy */ Proxied<T>;
 
 export const mutableHandlersMaker: <T extends object>(
   reactive: ProxyFunction<T>,
@@ -40,9 +41,7 @@ export const mutableHandlersMaker: <T extends object>(
   },
 });
 
-function isNonNullObject<T extends object | null>(
-  obj: T,
-): obj is NonNullable<T> {
+function isNonNullObject<T extends object | null>(obj: T): obj is NonNullable<T> {
   return obj !== null && typeof obj === "object";
 }
 

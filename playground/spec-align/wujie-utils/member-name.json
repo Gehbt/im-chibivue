@@ -1,0 +1,4 @@
+{
+  "root": "@im-chibivue/spec-align",
+  "members": ["@im-chibivue/im-chibivue-playground", "@im-chibivue/original-playground"]
+}

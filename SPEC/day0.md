@@ -49,7 +49,7 @@ export const createApp = (options): App => {
 
 ```js
 // 浏览器脚本
-import { createApp } from "chibivue";
+import { createApp } from "im-chibivue";
 const app = createApp({
   render() {
     return "Hello world.";

@@ -1,0 +1,23 @@
+{
+  "name": "@im-chibivue/im-chibivue-playground",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "build-debug": "vite build --debug",
+    "type-check": "tsc --noEmit",
+    "type-check-debug": "tsc --noEmit --debug --showConfig"
+  },
+  "dependencies": {
+    "typescript": "catalog:",
+    "vite": "catalog:"
+  },
+  "devDependencies": {
+    "@im-chibivue/playground-shared": "workspace:*",
+    "im-chibivue": "workspace:*",
+    "vite-plugin-inspect": "^11.3.3"
+  }
+}

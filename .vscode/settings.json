@@ -5,20 +5,45 @@
     "dpdm",
     "endregion",
     "lifecycles",
+    "oxfmt",
+    "oxlint",
     "rolldown",
     "skott",
+    "tsgolint",
     "unocss",
     "vnode",
     "WUJIE"
   ],
+  "cSpell.ignorePaths": [
+    "package-lock.json",
+    "node_modules",
+    ".git/objects",
+    ".vscode",
+    ".vscode-insiders",
+    "package.json"
+  ],
+  "editor.formatOnSave": true,
+  "editor.formatOnSaveMode": "file",
+  // disable typescript format
+  "typescript.format.enable": false,
   "editor.codeActionsOnSave": {
-    "source.fixAll": "explicit"
+    "source.fixAll.oxc": "explicit",
+    "source.sortImports": "always"
   },
   "workbench.colorTheme": "One Dark Pro Mix",
-  "editor.formatOnSave": true,
   "[typescript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "oxc.oxc-vscode"
   },
+  "[javascript]": {
+    "editor.defaultFormatter": "oxc.oxc-vscode"
+  },
+  "[vue]": {
+    "editor.defaultFormatter": "oxc.oxc-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "oxc.oxc-vscode"
+  },
+  "turbo.path": "./node_modules/.bin/turbo",
   "vscode-highlight-text.rules": {
     "vue": {
       "light": {
@@ -76,22 +101,9 @@
       }
     }
   },
-  "files.associations": {
-    ".env": "properties"
-  },
-  "typescript.tsdk": "node_modules\\typescript\\lib",
-  "eslint.options": {
-    "flags": ["unstable_ts_config"]
-  },
+  "typescript.tsdk": "./node_modules/typescript/lib",
   "references.preferredLocation": "peek",
   "pnpmCatalogLens.enabled": true,
-  "cSpell.ignorePaths": [
-    "package-lock.json",
-    "node_modules",
-    "vscode-extension",
-    ".git/objects",
-    ".vscode",
-    ".vscode-insiders",
-    "package.json"
-  ]
+
+  "oxc.typeAware": true
 }

@@ -1,0 +1,21 @@
+{
+  "name": "@im-chibivue/playground-shared",
+  "version": "1.0.0",
+  "description": "im-chibivue common utils",
+  "keywords": [],
+  "license": "MIT",
+  "author": "Gehbt",
+  "type": "module",
+  "sideEffects": false,
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "rolldown -c ./rolldown.config.mjs"
+  }
+}

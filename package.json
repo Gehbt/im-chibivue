@@ -1,57 +1,69 @@
 {
-  "name": "chibivue",
-  "version": "1.5.0",
+  "name": "im-chibivue-repo",
+  "version": "0.1.5",
   "private": true,
-  "description": "chibivue repository",
+  "description": "im-chibivue monorepo",
   "scripts": {
     "dev": "turbo run dev --parallel",
-    "dev:p": "pnpm -C examples/playground run dev",
-    "dev:a": "pnpm -C examples/aff-vue run dev",
-    "build": "turbo run build --parallel",
-    "type-check": "turbo run type-check --parallel",
-    "rm-node_modules": "rimraf packages/*/node_modules --glob",
-    "build.chibivue": "rolldown -c ./rolldown.config.mjs",
-    "check-types": "tsc --noEmit",
-    "sherif": "pnpx sherif@latest",
-    "dpdm": "dpdm ./packages/index.ts",
+    "dev:p": "turbo run @im-chibivue/im-chibivue-playground#dev",
+    "dev:a": "turbo run @im-chibivue/original-plaground#dev",
+    "build": "turbo run im-chibivue#build",
+    "build.shared": "turbo run @im-chibivue/playground-shared#build",
     "postinstall": "stale-dep -u",
-    "pnpm-workspace-graph": "pnpm-workspace-graph",
+    "type-check": "turbo run type-check --parallel",
+    "//": "utils",
+    "rm-node_modules": "node ./scripts/rm-node_modules.ts",
+    "sherif": "sherif",
+    "dpdm": "dpdm ./packages/index.ts",
+    "workspace-graph": "turbo build --graph workspace-graph.dot",
     "knip": "knip",
     "nolyfill": "pnpx nolyfill",
-    "skott": "skott --displayMode=webapp --trackThirdPartyDependencies --trackBuiltinDependencies",
+    "skott": "npx skott --displayMode=webapp --trackThirdPartyDependencies --trackBuiltinDependencies",
+    "node-modules-inspector": "node-modules-inspector",
     "simple-git-hooks": "simple-git-hooks",
     "bumpp": "bumpp"
   },
   "devDependencies": {
-    "@types/node": "^22.15.34",
-    "@unocss/preset-uno": "^66.3.2",
-    "bumpp": "^10.2.0",
-    "dpdm": "^3.14.0",
-    "knip": "^5.61.3",
+    "@microsoft/api-extractor": "^7.56.0",
+    "@types/node": "^24.10.9",
+    "bumpp": "^10.4.0",
+    "dpdm": "^4.0.1",
+    "execa": "^9.6.1",
+    "hereby": "^1.11.1",
+    "jiti": "^2.6.1",
+    "knip": "^5.82.1",
+    "node-modules-inspector": "^1.3.1",
     "npm-run-all2": "^8.0.4",
-    "pnpm-workspace-graph": "^0.2.1",
-    "prettier": "3.5.3",
-    "rolldown": "^1.0.0-beta.22",
-    "simple-git-hooks": "^2.13.0",
-    "skott": "^0.35.4",
-    "sonda": "^0.8.2",
-    "stale-dep": "^0.8.2",
+    "oxfmt": "^0.27.0",
+    "oxlint": "^1.42.0",
+    "oxlint-tsgolint": "^0.11.4",
+    "rolldown": "^1.0.0-rc.2",
+    "rolldown-plugin-dts": "^0.21.8",
+    "sherif": "^1.10.0",
+    "simple-git-hooks": "^2.13.1",
+    "sonda": "^0.10.1",
+    "stale-dep": "^0.8.4",
     "tsc-shame": "^0.2.14",
-    "turbo": "^2.5.4",
+    "turbo": "^2.8.1",
     "typescript": "catalog:",
-    "unocss": "^66.3.2"
-  },
-  "packageManager": "pnpm@10.12.4",
-  "pnpm": {
-    "overrides": {
-      "is-core-module": "npm:@nolyfill/is-core-module@^1.0.39",
-      "isarray": "npm:@nolyfill/isarray@^1.0.44",
-      "string.prototype.replaceall": "npm:@nolyfill/string.prototype.replaceall@^1.0.44",
-      "typedarray": "npm:@nolyfill/typedarray@^1.0.44"
-    }
+    "unocss": "^66.6.0"
   },
   "simple-git-hooks": {
     "post-merge": "stale-dep",
     "preserveUnused": true
+  },
+  "packageManager": "pnpm@10.28.2",
+  "pnpm": {
+    "overrides": {
+      "is-core-module": "npm:@nolyfill/is-core-module@^1.0.39",
+      "isarray": "npm:@nolyfill/isarray@^1.0.44",
+      "safe-buffer": "npm:@nolyfill/safe-buffer@^1.0.44",
+      "string.prototype.replaceall": "npm:@nolyfill/string.prototype.replaceall@^1.0.44",
+      "typedarray": "npm:@nolyfill/typedarray@^1.0.44"
+    },
+    "onlyBuiltDependencies": [
+      "esbuild",
+      "simple-git-hooks"
+    ]
   }
 }

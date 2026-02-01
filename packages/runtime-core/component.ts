@@ -19,9 +19,7 @@ export interface InternalRenderFunction {
   (): VNodeChild;
 }
 // 构造 组件实例
-export function createComponentInstance(
-  vnode: VNode,
-): ComponentInternalInstance {
+export function createComponentInstance(vnode: VNode): ComponentInternalInstance {
   const type = vnode.type as Component;
   /**
    * @desc 这里的null属性为非空断言, 让使用变得方便, 同时需要保证 这些属性 只能在第一次写入后才能使用

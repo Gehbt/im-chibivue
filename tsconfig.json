@@ -1,29 +1,10 @@
 {
-  "references": [
-    {
-      "path": "./tsconfig.script.json"
-    }
-  ],
   "compilerOptions": {
-    "target": "ES2020",
+    "allowJs": true,
     "module": "Preserve",
     "moduleResolution": "Bundler",
-    "lib": ["DOM"],
-    "strict": true,
-    "strictFunctionTypes": true,
-    "noImplicitReturns": true,
-    "noImplicitOverride": true,
-    "exactOptionalPropertyTypes": true,
-    "allowUnreachableCode": false,
-    "paths": {
-      "chibivue": ["./packages"]
-    },
-    "allowJs": true,
-    "esModuleInterop": true,
-    "verbatimModuleSyntax": true,
-    "skipLibCheck": true,
-    "noEmit": true
+    "noEmit": true,
+    "skipLibCheck": true
   },
-  "include": ["packages/**/*.ts"],
-  "exclude": ["node_modules", "dist"]
+  "include": ["scripts", "packages/rolldown.config.mjs"]
 }
