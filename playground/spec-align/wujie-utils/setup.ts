@@ -15,9 +15,11 @@ export function setupWujie(
     }) as cacheOptions;
   });
   setupOptions.forEach((options, index) => {
-    DEV && console.log("setup app", appName[index]);
+    // oxlint-disable-next-line no-unused-expressions
+    WJ_DEBUG && console.log("setup app", appName[index]);
     setupApp(options);
   });
 
-  DEV && console.log("wujie setup success!");
+  // oxlint-disable-next-line no-unused-expressions
+  WJ_DEBUG && console.log("wujie setup success!");
 }

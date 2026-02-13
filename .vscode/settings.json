@@ -48,12 +48,18 @@
     "vue": {
       "light": {
         "#800080": {
-          "match": ["v-if", "v-else-if", "v-else"],
+          "match": [
+            "v-if",
+            "v-else-if",
+            "v-else"
+          ],
           "before": {
             "contentText": "✨"
           }
         },
-        "#B392F0": ["v-for"],
+        "#B392F0": [
+          "v-for"
+        ],
         "#FFC83D": [
           "<template\\s+(\\#[^\\s\\/>=]+)",
           "v-bind",
@@ -64,7 +70,9 @@
           "v-text",
           "v-pre"
         ],
-        "rgb(99, 102, 241)": [":is"],
+        "rgb(99, 102, 241)": [
+          ":is"
+        ],
         "rgb(14, 165, 233)": [
           "(defineProps)(?=[<\\(])",
           "defineOptions",
@@ -74,12 +82,18 @@
       },
       "dark": {
         "#800080": {
-          "match": ["v-if", "v-else-if", "v-else"]
+          "match": [
+            "v-if",
+            "v-else-if",
+            "v-else"
+          ]
           // "before": {
           //   "contentText": "🔱"
           // }
         },
-        "#B392F0": ["v-for"],
+        "#B392F0": [
+          "v-for"
+        ],
         "#FFC83D": [
           "<template\\s+(\\#[^\\s\\/>=]+)",
           "v-bind",
@@ -90,7 +104,9 @@
           "v-text"
         ],
         "rgb(99, 102, 241)": {
-          "match": [":is"]
+          "match": [
+            ":is"
+          ]
         },
         "rgb(14, 165, 233)": [
           "(defineProps)(?=[<\\(])",
@@ -104,6 +120,6 @@
   "typescript.tsdk": "./node_modules/typescript/lib",
   "references.preferredLocation": "peek",
   "pnpmCatalogLens.enabled": true,
-
-  "oxc.typeAware": true
+  "oxc.typeAware": true,
+  "typescript.experimental.useTsgo": true
 }

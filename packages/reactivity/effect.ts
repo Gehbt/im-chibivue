@@ -31,6 +31,7 @@ export class ReactiveEffect<T = any> {
   run(): T {
     // 在执行 fn 之前保存 (模块的)activeEffect，并在执行完后恢复它。
     let saveAffect: ReactiveEffect | undefined = activeEffect;
+    // oxlint-disable-next-line typescript/no-this-alias
     activeEffect = this;
     const res = this.fn();
     activeEffect = saveAffect;

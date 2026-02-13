@@ -10,7 +10,7 @@ const path = process.getBuiltinModule("node:path");
  */
 /**
  * @param {RelativeFilePath<'$dir'>} p
- * @returns
+ * @returns {string}
  */
 const p2 = (p = ".") => path.join(import.meta.dirname, ".", p);
 
@@ -41,5 +41,15 @@ export default defineConfig({
   ],
   platform: "browser",
   treeshake: true,
-  resolve: {},
+  resolve: {
+    alias: {
+      "#shared": p2("./src/shared"),
+      "#reactivity": p2("./src/reactivity"),
+    },
+  },
+  transform: {
+    inject: {
+      __DEV__: JSON.stringify(true),
+    },
+  },
 });

@@ -10,11 +10,11 @@ export const mutableHandlersMaker: <T extends object>(
     if (key === Symbol.toStringTag) return "Reactive";
     // #region  doTrack
     // 在 get 前, 跟踪 effect
-    (() => {
+    if (__DEV__) {
       // 读的时候 lazy get
       // -- 检查单个属性的 dirty flag，刷新这个属性
       track(target, key);
-    })();
+    }
     // #endregion
     const res = Reflect.get(target, key, receiver);
 
@@ -30,12 +30,12 @@ export const mutableHandlersMaker: <T extends object>(
     const res = Reflect.set(target, key, value, receiver);
     // #region doTrigger
     // 在 set 后, 触发 effect
-    (() => {
+    if (__DEV__) {
       // set 的时候 eager 更新
       if (hasChanged(value, oldValue)) {
         trigger(target, key);
       }
-    })();
+    }
     // #endregion
     return res;
   },

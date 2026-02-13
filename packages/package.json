@@ -5,6 +5,16 @@
   "description": "im-chibivue main",
   "main": "./dist/im-chibivue.js",
   "types": "./dist/im-chibivue.d.ts",
+  "imports": {
+    "#shared": {
+      "types": "./shared/index.ts",
+      "import": "./shared/index.ts"
+    },
+    "#reactivity": {
+      "types": "./reactivity/index.ts",
+      "import": "./reactivity/index.ts"
+    }
+  },
   "exports": {
     ".": {
       "types": "./dist/im-chibivue.d.ts",

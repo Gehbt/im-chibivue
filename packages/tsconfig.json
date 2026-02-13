@@ -4,6 +4,7 @@
     "module": "Preserve",
     "moduleResolution": "Bundler",
     "lib": ["DOM"],
+    "rootDir": ".",
     "strict": true,
     "noImplicitReturns": true,
     "noImplicitOverride": true,
@@ -12,7 +13,11 @@
     "esModuleInterop": true,
     "verbatimModuleSyntax": true,
     "skipLibCheck": true,
-    "isolatedModules": true
+    "isolatedModules": true,
+    "paths": {
+      "#shared": ["./shared/index.ts"],
+      "#reactivity": ["./reactivity/index.ts"]
+    }
   },
   "include": ["./**/*.ts"],
   "exclude": ["node_modules", "dist"]

@@ -4,5 +4,5 @@ declare global {
   // const ORIGIN_VUE_URL: string;
   const IM_CHIBI_VUE_URL: string;
   const ORIGIN_VUE_URL: string;
-  const DEV: true;
+  const WJ_DEBUG: boolean;
 }

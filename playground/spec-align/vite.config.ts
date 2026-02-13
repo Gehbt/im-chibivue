@@ -18,7 +18,10 @@ export default defineConfig({
     },
   },
   define: {
-    DEV: true,
+    WJ_DEBUG: "/* WJ_DEBUG */ true",
+  },
+  build: {
+    minify: false,
   },
   server: {
     cors: true,

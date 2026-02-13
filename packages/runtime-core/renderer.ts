@@ -26,23 +26,24 @@ export interface RendererOptions<HostNode = RendererNode, HostElement = Renderer
   /**
    * @desc 处理prop
    */
-  patchProp(el: HostElement, key: string, value: any): void;
+  patchProp(this: void, el: HostElement, key: string, value: any): void;
   /**
    * @desc 通过 tagName 创建元素
    */
-  createElement(type: string): HostElement;
+  createElement(this: void, type: string): HostElement;
   /**
    * @desc 裸的 text 节点
    */
-  createText(text: string): HostNode;
+  createText(this: void, text: string): HostNode;
   /**
    * @desc 原始的插入节点的文本内容
    */
-  setText(node: HostNode, text: string): void;
+  setText(this: void, node: HostNode, text: string): void;
   /**
    * @desc 插入节点(前插 | 后插)
    */
   insert(
+    this: void,
     child: HostNode,
     parent: HostNode,
     anchor?: HostNode | null,
@@ -51,9 +52,9 @@ export interface RendererOptions<HostNode = RendererNode, HostElement = Renderer
   /**
    * @desc 原始的插入节点的文本内容
    */
-  setElementText(node: HostNode, text: string): void;
+  setElementText(this: void, node: HostNode, text: string): void;
 
-  parentNode(node: HostNode): HostNode | null;
+  parentNode(this: void, node: HostNode): HostNode | null;
 }
 
 // #region  定义渲染 接口
